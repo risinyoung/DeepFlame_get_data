@@ -13,14 +13,22 @@ def get_data_in_file(items):
         
         data = []
         while True:
+            ifInnerField = False
             try:
                 start_line = contents[end_line+1:].index('(\n') + end_line + 1
+                for i in range(end_line+1, start_line):
+                    if 'internalField' in contents[i]:
+                        ifInnerField = True
+                        break
                 end_line = contents[start_line+1:].index(')\n') + start_line + 1
             except:
                 break
-            data.append(np.array([float(x) for x in contents[start_line+1: end_line]]))
-        data_total.append(np.concatenate(data))
+            if ifInnerField:
+                data.append(np.array([float(x) for x in contents[start_line+1: end_line]]))
+        data = np.concatenate(data)
+        data_total.append(data)
     data_total = np.concatenate([x[:,np.newaxis] for x in data_total], axis=1)
+    print(f'data size: {data_total.shape[0]}')
     return data_total
             
 
