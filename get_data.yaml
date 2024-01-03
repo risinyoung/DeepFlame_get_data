@@ -1,3 +1,3 @@
 readItems: T p # necessary
 mechanismName: Wu24sp.yaml # optional, if set, whole species will be added to readItems.
-#readFiles: 0.0001 0.0002 # optional, files to be read. Default: all files with float name. 
+#readFiles: '0.0001 0.0002' # optional, files to be read. Default: all files with float name. 
